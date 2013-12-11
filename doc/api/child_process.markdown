@@ -589,4 +589,23 @@ done with care and by default will talk over the fd represented an
 environmental variable `NODE_CHANNEL_FD` on the child process. The input and
 output on this fd is expected to be line delimited JSON objects.
 
+## child_process.spawnSync(command, [args], [options])
+
+* `command` {String} The command to run
+* `args` {Array} List of string arguments
+* `options` {Object}
+  * `cwd` {String} Current working directory of the child process
+  * `input` {String|Buffer} The value which will be passed as stdin to the spawned process 
+  * `stdio` {Array|String} Child's stdio configuration. (See below)
+  * `customFds` {Array} **Deprecated** File descriptors for the child to use
+    for stdio.  (See below)
+  * `env` {Object} Environment key-value pairs
+  * `detached` {Boolean} The child will be a process group leader.  (See below)
+  * `uid` {Number} Sets the user identity of the process. (See setuid(2).)
+  * `gid` {Number} Sets the group identity of the process. (See setgid(2).)
+  * `timeout` {Number} In milliseconds the maximum amount of time the process is allowed to run. (Default: undefined)
+  * `killSignal` {String} The signal value to be used when the spawned process will be killed. (Default: 'SIGTERM')
+  * `maxBuffer` {Number}
+* return: {ChildProcess object}
+
 [EventEmitter]: events.html#events_class_events_eventemitter
