@@ -40,16 +40,14 @@ var server = http.createServer(function(req, res) {
   });
 }).listen(common.PORT, function() {
   var req = http.request({ port: common.PORT, agent: false }, function(res) {
-    res.once('readable', function() {
-      /* read only one buffer */
-      res.read(1);
-    });
+    res.resume();
   });
   req.end();
   req.on('close', function() {
     receivedClose++;
   });
-  req.on('error', function() {
+  req.on('error', function(err) {
+    assert.equal(err.code, 'HPE_INVALID_CONTENT_LENGTH');
     receivedError++;
   });
 });
