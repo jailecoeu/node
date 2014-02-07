@@ -29,9 +29,23 @@ var options = {
 };
 
 assert.throws(function() {
-    spawnSync('cat', [], options)
-  },
-  /TypeError:.*should be Buffer or string not number/);
+  spawnSync('cat', [], options)
+}, /TypeError:.*should be Buffer or string not number/);
+
+
+assert.throws(function() {
+  options = {
+    stdio: 'inherit',
+  };
+  spawnSync(process.execPath, ['-v'], options);
+}, /TypeError: Synchronous forks cannot inherit stdio/);
+
+assert.throws(function() {
+  options = {
+    stdio: ['ignore', 'inherit', 'inherit'],
+  };
+  spawnSync(process.execPath, ['-v'], options);
+}, /TypeError: Synchronous forks cannot inherit stdio/); 
 
 function checkRet(ret) {
   assert.strictEqual(ret.status, 0);
