@@ -127,6 +127,7 @@ namespace node {
   V(onstop_string, "onstop")                                                  \
   V(output_string, "output")                                                  \
   V(path_string, "path")                                                      \
+  V(pid_string, "pid")                                                        \
   V(pipe_string, "pipe")                                                      \
   V(port_string, "port")                                                      \
   V(processed_string, "processed")                                            \

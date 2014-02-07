@@ -667,6 +667,9 @@ Local<Object> SyncProcessRunner::BuildResultObject() {
   else
     js_result->Set(env()->output_string(), Null(node_isolate));
 
+  js_result->Set(env()->pid_string(),
+                 Number::New(env()->isolate(), uv_process_.pid));
+
   return scope.Close(js_result);
 }
 
