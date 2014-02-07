@@ -36,19 +36,11 @@ switch(process.argv[2]) {
     break;
   default:
     var start = Date.now();
-    var caught = false;
-    try
-    {
-      var ret = spawnSync(process.execPath, [__filename, 'child'], {timeout: TIMER});
-    } catch (e) {
-      caught = true;
-      ret = e;
-      assert.strictEqual(e.errno, 'ETIMEDOUT');
-    } finally {
-      assert.strictEqual(caught, true);
-      var end = Date.now() - start;
-      assert(end < SLEEP);
-      assert(ret.status > 128);
-    }
+    var ret = spawnSync(process.execPath, [__filename, 'child'], {timeout: TIMER});
+    assert.strictEqual(ret.error.errno, 'ETIMEDOUT');
+    console.log(ret);
+    var end = Date.now() - start;
+    assert(end < SLEEP);
+    assert(ret.status > 128);
     break;
 }
